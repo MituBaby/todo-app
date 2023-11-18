@@ -1,15 +1,19 @@
 #!/bin/bash
 
-# Set your GitHub username and repository name
-GH_USERNAME="mitubaby"
-GH_REPO="todo-app"
-GHCR_TOKEN="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"
+# Masuk ke GitHub Container Registry
+echo "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" | docker login ghcr.io -u mitubaby --password-stdin
 
-# Login to GitHub Container Registry using your GitHub Token
-echo "${GHCR_TOKEN}" | docker login ghcr.io -u "${GH_USERNAME}" --password-stdin
+# Membangun Docker image
+docker compose up -d
 
-# Build and push Docker images
-docker-compose up --build -d
+# docker build -t ghcr.io/mitubaby/node:12-alpine .
+# docker build -t ghcr.io/mitubaby/mysql:5.7 .
 
-docker push node:12-alpine
-docker push mysql:5.7
+# mengubah nama image
+docker tag node:12-alpine ghcr.io/mitubaby/node:12-alpine
+docker tag mysql:5.7 ghcr.io/mitubaby/mysql:5.7
+
+
+# Push image Docker ke GitHub Container Registry
+docker push ghcr.io/mitubaby/node:12-alpine
+docker push ghcr.io/mitubaby/mysql:5.7
