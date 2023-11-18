@@ -8,6 +8,8 @@ GHCR_TOKEN="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"
 # Login to GitHub Container Registry using your GitHub Token
 echo "${GHCR_TOKEN}" | docker login ghcr.io -u "${GH_USERNAME}" --password-stdin
 
-# Build and push Docker images 
+# Build and push Docker images
+docker-compose up --build -d
+
 docker push node:12-alpine
 docker push mysql:5.7
